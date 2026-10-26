@@ -21,7 +21,7 @@ You need **[Node.js 22+](https://nodejs.org/en/download)**, **Discord desktop**,
 **1. Install**
 
 ```sh
-npm install -g github:codewithriza/agent-presence
+npm install -g https://github.com/codewithriza/agent-presence/releases/download/v0.3.1-beta.1/agent-presence.tgz
 ```
 
 **2. Run setup**
