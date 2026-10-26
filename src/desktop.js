@@ -7,7 +7,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {randomUUID} from 'node:crypto';
 import {SessionDiscovery} from './discovery.js';
-import {SessionTail} from './session.js';
+import {SessionTail,sessionIsActive} from './session.js';
 import {activity,safeFile} from './activity.js';
 import {loadProfile} from './profile.js';
 import {Presence} from './rpc.js';
@@ -67,7 +67,9 @@ export async function desktop(args) {
   const discovery = options['sessions-dir'] ? new SessionDiscovery(path.resolve(options['sessions-dir'])) : null;
   const status = {runId,pid:process.pid,running:true,connection:'connecting',phase:state.phase,heartbeat:Date.now(),expiresAt:Date.now()+hours*3600000};
   const save = async()=>{ status.heartbeat=Date.now(); await writeFile(statusPath+'.tmp',JSON.stringify(status,null,2),{mode:0o600}); await rename(statusPath+'.tmp',statusPath); };
-  const rpc = new Presence(clientId,()=>activity(state),message=>{
+  let visible = false;
+  const currentActivity = () => visible ? activity(state) : null;
+  const rpc = new Presence(clientId,currentActivity,message=>{
     console.log(new Date().toISOString(),message);
     status.connection = message === 'Discord accepted activity' ? 'published' : message === 'Discord connected' ? 'connected' : message.startsWith('Discord:') ? 'error' : 'connecting';
     status.lastMessage = message;
@@ -97,6 +99,7 @@ export async function desktop(args) {
       if (stop === runId) break;
       if (discovery) {
         const active = await discovery.poll();
+        visible = sessionIsActive(active?.tail);
         if (active) {
           if (active.file !== activeFile) {
             activeFile = active.file; state.file = undefined;
@@ -107,9 +110,17 @@ export async function desktop(args) {
           }
           state.phase = active.tail.phase;
         }
-      } else state.phase = await tail.poll();
+      } else {
+        await tail.poll().catch(()=>{tail.caughtUp=false;});
+        state.phase = tail.phase;
+        visible = sessionIsActive(tail);
+      }
+      status.visible = visible;
+      if (!visible) watchProject(undefined);
+      else if (discovery) watchProject(discovery.sessions.get(activeFile)?.cwd);
+      else if (options.watch) watchProject(path.resolve(options.watch));
       status.phase = state.phase; status.project = state.project;
-      const payload = JSON.stringify(activity(state));
+      const payload = JSON.stringify(currentActivity());
       if (payload !== previous) {rpc.publish();previous=payload;}
       await save();
       await new Promise(resolve=>setTimeout(resolve,2000));

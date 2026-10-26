@@ -24,7 +24,12 @@ test('background desktop monitor publishes, transitions, and stops',async()=>{
   await until(()=>activities.some(a=>a?.assets?.large_text.includes('Working')));
   assert.throws(()=>invoke('start','--session',session,'--client-id','123456789012345678'));
   await appendFile(session,'{"type":"event_msg","payload":{"type":"task_complete"}}\n');
-  await until(()=>activities.some(a=>a?.assets?.large_text.includes('Waiting for you')));
+  const completedAt = activities.length;
+  await until(()=>activities.slice(completedAt).includes(null));
+  assert.equal(JSON.parse(invoke('status')).visible,false);
+  await appendFile(session,'{"type":"event_msg","payload":{"type":"task_started"}}\n');
+  const resumedAt = activities.length;
+  await until(()=>activities.slice(resumedAt).some(a=>a?.assets?.large_text.includes('Working')));
   const status=JSON.parse(invoke('status'));assert.equal(status.connection,'published');
   invoke('stop');await until(async()=>JSON.parse(await readFile(path.join(stateDir,'status.json'),'utf8')).running===false);started=false;
  } finally {

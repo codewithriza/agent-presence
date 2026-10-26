@@ -8,11 +8,19 @@ export function sessionEvent(record, previous = 'Waiting for you') {
   if (['task_complete','turn_aborted'].includes(record.payload?.type)) return 'Waiting for you';
   return previous;
 }
+// A crashed/exited client may never write a completion event.
+export const SESSION_LEASE_MS = 5 * 60 * 1000;
+export function sessionIsActive(tail, now = Date.now()) {
+  return Boolean(tail && tail.phase === 'Working' && tail.caughtUp &&
+    Number.isFinite(tail.modifiedAt) && now - tail.modifiedAt < SESSION_LEASE_MS);
+}
 export class SessionTail {
   constructor(file, onRecord = () => {}) { this.onRecord = onRecord; this.file = file; this.offset = 0; this.partial = ''; this.phase = 'Waiting for you'; this.discard = false; }
   async poll() {
     const info = await stat(this.file);
-    if (info.size < this.offset) { this.offset = 0; this.partial = ''; this.discard = false; }
+    this.modifiedAt = info.mtimeMs;
+    this.caughtUp = false;
+    if (info.size < this.offset) { this.offset = 0; this.partial = ''; this.discard = false; this.phase = 'Waiting for you'; }
     const handle = await open(this.file,'r');
     try {
       // Cap work per tick at 4 MB, keeping the event loop responsive.
@@ -32,6 +40,7 @@ export class SessionTail {
         if (this.partial.length > 1024 * 1024) { this.partial = ''; this.discard = true; }
       }
     } finally { await handle.close(); }
+    this.caughtUp = this.offset === info.size && !this.partial;
     return this.phase;
   }
 }

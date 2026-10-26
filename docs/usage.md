@@ -7,7 +7,7 @@ Discord presence for coding agents. The member list shows your product. The card
 Node.js 22+ and Discord desktop are required. This package is not published to npm yet.
 
 ```sh
-npm install -g ./agent-presence-0.3.1-beta.1.tgz
+npm install -g ./agent-presence-0.3.2-beta.1.tgz
 cd your-project
 agent-presence codex --project "My product"
 agent-presence claude --project "My product" --task "Building checkout"

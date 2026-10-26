@@ -1,7 +1,7 @@
 <p align="center"><img src="assets/agent-presence.png" width="100" alt="Agent Presence"></p>
 <h1 align="center">Agent Presence</h1>
 <p align="center">Discord Rich Presence for AI Coding Agents.</p>
-<p align="center"><img src="https://img.shields.io/badge/tests-21%20passing-brightgreen" alt="21 tests pass locally"> <img src="https://img.shields.io/badge/license-MIT-lime" alt="MIT"> <img src="https://img.shields.io/badge/Node-22%2B-blue" alt="Node 22+"> <img src="https://img.shields.io/badge/status-beta-orange" alt="Beta"></p>
+<p align="center"><img src="https://img.shields.io/badge/tests-22%20passing-brightgreen" alt="21 tests pass locally"> <img src="https://img.shields.io/badge/license-MIT-lime" alt="MIT"> <img src="https://img.shields.io/badge/Node-22%2B-blue" alt="Node 22+"> <img src="https://img.shields.io/badge/status-beta-orange" alt="Beta"></p>
 
 Show what you're building while you use Codex, Claude Code, Gemini CLI, OpenCode, Aider, Goose, Copilot, Cursor, or your own terminal agent.
 
@@ -21,7 +21,7 @@ You need **[Node.js 22+](https://nodejs.org/en/download)**, **Discord desktop**,
 **1. Install**
 
 ```sh
-npm install -g https://github.com/codewithriza/agent-presence/releases/download/v0.3.1-beta.1/agent-presence.tgz
+npm install -g https://github.com/codewithriza/agent-presence/releases/download/v0.3.2-beta.1/agent-presence.tgz
 ```
 
 **2. Run setup**
@@ -117,3 +117,9 @@ npm pack
 This is a beta. Codex log parsing uses an internal format; multi-publisher arbitration, automatic chat switching for other agents, and reliable Windows support are still open work. See the docs before using it with private projects.
 
 MIT-licensed code. Third-party tool names and artwork belong to their respective owners; this project is independent and not endorsed by them.
+
+### When the card disappears
+
+The desktop monitor clears your activity when a turn completes or is cancelled, then shows it again on your next turn. If a client exits without a completion event, the card expires after five minutes without session-log updates. A long silent task can also hit this timeout; new log activity restores it. Old completed chats are not published when the monitor starts.
+
+To stop the monitor immediately, run `agent-presence desktop stop` (include your `--state-dir` if you configured one).

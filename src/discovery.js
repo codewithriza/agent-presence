@@ -42,7 +42,7 @@ export class SessionDiscovery {
    }
    this.lastScan=Date.now();
   }
-  for(const session of this.sessions.values())await session.tail.poll().catch(()=>{});
+  for(const session of this.sessions.values())await session.tail.poll().catch(()=>{session.tail.caughtUp=false;});
   return selectSession(this.sessions.values());
  }
 }

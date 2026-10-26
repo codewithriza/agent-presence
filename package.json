@@ -1,6 +1,6 @@
 {
   "name": "agent-presence",
-  "version": "0.3.1-beta.1",
+  "version": "0.3.2-beta.1",
   "description": "Discord Rich Presence for AI coding agents: Codex, Claude Code, Gemini CLI, OpenCode and more",
   "type": "module",
   "bin": {
