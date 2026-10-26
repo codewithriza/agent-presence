@@ -1,0 +1,21 @@
+{
+  "name": "Ship Signal",
+  "task": "\u26a1 Building something worth shipping",
+  "project": "my-project",
+  "type": "playing",
+  "statusDisplay": "state",
+  "smallImage": "agent_badge",
+  "smallText": "Human taste. Agent speed.",
+  "focusMinutes": 50,
+  "buttons": [
+    {
+      "label": "\u2197 View project",
+      "url": "https://example.com/project"
+    },
+    {
+      "label": "\u25b6 Live demo",
+      "url": "https://example.com/demo"
+    }
+  ],
+  "detailsUrl": "https://example.com/project"
+}

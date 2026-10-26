@@ -1,0 +1,8 @@
+node_modules/
+*.tgz
+.DS_Store
+.env*
+work/
+
+# Local live session instructions (contain machine paths)
+LIVE.md

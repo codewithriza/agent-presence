@@ -1,0 +1,7 @@
+{
+  "name": "Ship",
+  "task": "Building Ship Signal",
+  "project": "Ship Signal",
+  "type": "playing",
+  "statusDisplay": "state"
+}

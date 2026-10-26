@@ -1,0 +1,42 @@
+{
+  "name": "ship-signal",
+  "version": "0.3.1-beta.1",
+  "description": "Discord Rich Presence for terminal coding agents",
+  "type": "module",
+  "bin": {
+    "ship-signal": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepack": "npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "files": [
+    "src/",
+    "profiles/",
+    "assets/",
+    "README.md",
+    "LICENSE",
+    "docs/",
+    "CONTRIBUTING.md",
+    "SECURITY.md"
+  ],
+  "keywords": [
+    "discord",
+    "rich-presence",
+    "codex",
+    "claude-code",
+    "terminal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codewithriza/ship-signal.git"
+  },
+  "homepage": "https://github.com/codewithriza/ship-signal#readme",
+  "bugs": {
+    "url": "https://github.com/codewithriza/ship-signal/issues"
+  }
+}
