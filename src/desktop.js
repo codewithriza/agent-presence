@@ -56,13 +56,13 @@ export async function desktop(args) {
       const child = spawn(process.execPath,[fileURLToPath(new URL('./cli.js',import.meta.url)),'desktop','_run',...serialized],{detached:true,stdio:['ignore',log.fd,log.fd]});
       await new Promise((resolve,reject)=>{child.once('spawn',resolve);child.once('error',reject);});
       child.unref();
-      console.log(`Started desktop monitor (PID ${child.pid}). Check: ship-signal desktop status --state-dir "${dir}"`);
+      console.log(`Started desktop monitor (PID ${child.pid}). Check: agent-presence desktop status --state-dir "${dir}"`);
     } catch(error) { await rm(path.join(dir,'lock'),{force:true}); throw error; }
     finally {await log.close();}
     return;
   }
   const runId = randomUUID();
-  const state = {tool:'codex',task:options.task || profile.task || 'Building Ship Signal',project:options.project || profile.project || 'Ship Signal',started:Math.floor(Date.now()/1000),profile,phase:'Working'};
+  const state = {tool:'codex',task:options.task || profile.task || 'Building Agent Presence',project:options.project || profile.project || 'Agent Presence',started:Math.floor(Date.now()/1000),profile,phase:'Working'};
   const tail = session ? new SessionTail(session) : null;
   const discovery = options['sessions-dir'] ? new SessionDiscovery(path.resolve(options['sessions-dir'])) : null;
   const status = {runId,pid:process.pid,running:true,connection:'connecting',phase:state.phase,heartbeat:Date.now(),expiresAt:Date.now()+hours*3600000};

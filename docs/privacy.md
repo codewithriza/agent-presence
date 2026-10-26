@@ -1,6 +1,6 @@
 # Privacy and architecture
 
-Ship Signal runs locally. It connects to Discord desktop's IPC socket and sends Rich Presence using the public application ID. This ID is not a secret. It never asks for a Discord password, account token, or bot token.
+Agent Presence runs locally. It connects to Discord desktop's IPC socket and sends Rich Presence using the public application ID. This ID is not a secret. It never asks for a Discord password, account token, or bot token.
 
 ## Public data
 

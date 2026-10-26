@@ -32,7 +32,7 @@ test('supports external animated art and clickable fields',()=>{
 test('invalid profile or focus fails before launching an agent',()=>{
  for(const flags of [['--profile','missing.json'],['--focus','NaN']]){
  const result=spawnSync(process.execPath,['src/cli.js','codex',...flags,'--preview'],{encoding:'utf8'});
- assert.equal(result.status,2);assert.match(result.stderr,/ship-signal/);
+ assert.equal(result.status,2);assert.match(result.stderr,/agent-presence/);
  }
 });
 
@@ -43,7 +43,7 @@ test('main logo follows active agent',()=>{
 });
 
 test('member status shows only product or Building fallback',()=>{
- assert.equal(activity({...state,project:'Ship Signal',profile:{}}).state,'Ship Signal');
+ assert.equal(activity({...state,project:'Agent Presence',profile:{}}).state,'Agent Presence');
  assert.equal(activity({...state,project:'',profile:{}}).state,'Building');
  assert.equal(activity({...state,profile:{}}).status_display_type,1);
 });

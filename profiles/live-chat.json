@@ -1,7 +1,7 @@
 {
   "name": "Ship",
-  "task": "Building Ship Signal",
-  "project": "Ship Signal",
+  "task": "Building Agent Presence",
+  "project": "Agent Presence",
   "type": "playing",
   "statusDisplay": "state"
 }

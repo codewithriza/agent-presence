@@ -11,8 +11,8 @@ about: Something is not working
 **Environment**
 - OS:
 - Node (`node --version`):
-- Ship Signal version:
+- Agent Presence version:
 - Agent and mode (terminal / desktop):
 
 **Diagnostics**
-Paste relevant `ship-signal doctor` output. Remove private paths, prompts and credentials.
+Paste relevant `agent-presence doctor` output. Remove private paths, prompts and credentials.

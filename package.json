@@ -1,9 +1,10 @@
 {
-  "name": "ship-signal",
+  "name": "agent-presence",
   "version": "0.3.1-beta.1",
-  "description": "Discord Rich Presence for terminal coding agents",
+  "description": "Discord Rich Presence for AI coding agents: Codex, Claude Code, Gemini CLI, OpenCode and more",
   "type": "module",
   "bin": {
+    "agent-presence": "src/cli.js",
     "ship-signal": "src/cli.js"
   },
   "scripts": {
@@ -26,17 +27,24 @@
   ],
   "keywords": [
     "discord",
+    "discord-rpc",
     "rich-presence",
+    "ai-coding",
+    "coding-agent",
     "codex",
     "claude-code",
-    "terminal"
+    "gemini-cli",
+    "opencode",
+    "aider",
+    "cursor",
+    "copilot"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/codewithriza/ship-signal.git"
+    "url": "https://github.com/codewithriza/agent-presence.git"
   },
-  "homepage": "https://github.com/codewithriza/ship-signal#readme",
+  "homepage": "https://github.com/codewithriza/agent-presence#readme",
   "bugs": {
-    "url": "https://github.com/codewithriza/ship-signal/issues"
+    "url": "https://github.com/codewithriza/agent-presence/issues"
   }
 }

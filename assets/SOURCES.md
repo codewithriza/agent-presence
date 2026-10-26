@@ -10,4 +10,4 @@ Tool artwork identifies third-party software; respective owners retain trademark
 - Goose: https://goose.vcorp.ai/img/goose-logo-black.png
 - Cursor: https://cursor.com/marketing-static/icon-192x192-light.png
 - Copilot: community-maintained LobeHub icons, pinned version 2.5.0: https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@2.5.0/dark/githubcopilot.png
-- Ship Signal: generated for this project.
+- Agent Presence: generated for this project.

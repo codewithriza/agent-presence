@@ -1,4 +1,4 @@
-# Ship Signal
+# Agent Presence
 
 Discord presence for coding agents. The member list shows your product. The card shows the latest changed file, the tool's logo, and elapsed time. Task and agent status live in the artwork hover text.
 
@@ -7,36 +7,36 @@ Discord presence for coding agents. The member list shows your product. The card
 Node.js 22+ and Discord desktop are required. This package is not published to npm yet.
 
 ```sh
-npm install -g ./ship-signal-0.3.1-beta.1.tgz
+npm install -g ./agent-presence-0.3.1-beta.1.tgz
 cd your-project
-ship-signal codex --project "My product"
-ship-signal claude --project "My product" --task "Building checkout"
-ship-signal gemini
-ship-signal opencode
-ship-signal aider
-ship-signal goose
-ship-signal copilot
-ship-signal cursor-agent
+agent-presence codex --project "My product"
+agent-presence claude --project "My product" --task "Building checkout"
+agent-presence gemini
+agent-presence opencode
+agent-presence aider
+agent-presence goose
+agent-presence copilot
+agent-presence cursor-agent
 ```
 
-Ship's shared Discord Application ID is built in. No account token, bot token, OAuth consent, or developer portal setup is needed. Enable activity sharing in Discord. Each coding tool must already be installed; Ship Signal doesn't install or authenticate the tools.
+Ship's shared Discord Application ID is built in. No account token, bot token, OAuth consent, or developer portal setup is needed. Enable activity sharing in Discord. Each coding tool must already be installed; Agent Presence doesn't install or authenticate the tools.
 
 Use any executable, including an absolute path. Arguments after `--` go directly to the child without shell interpolation:
 
 ```sh
-ship-signal my-agent --project "Storefront" -- --model example
+agent-presence my-agent --project "Storefront" -- --model example
 ```
 
-Known tools get branded artwork. Unknown tools use Ship's generic mark; an explicit JSON profile can supply any public HTTPS image or uploaded Discord asset key. The CLI doesn't intercept plain `codex` or `claude` commands: launch them through `ship-signal`.
+Known tools get branded artwork. Unknown tools use Ship's generic mark; an explicit JSON profile can supply any public HTTPS image or uploaded Discord asset key. The CLI doesn't intercept plain `codex` or `claude` commands: launch them through `agent-presence`.
 
 ## Follow your Codex chats automatically
 
 ```sh
-ship-signal desktop start \
+agent-presence desktop start \
   --sessions-dir "$HOME/.codex/sessions" \
-  --state-dir "$HOME/.local/state/ship-signal"
-ship-signal desktop status --state-dir "$HOME/.local/state/ship-signal"
-ship-signal desktop stop --state-dir "$HOME/.local/state/ship-signal"
+  --state-dir "$HOME/.local/state/agent-presence"
+agent-presence desktop status --state-dir "$HOME/.local/state/agent-presence"
+agent-presence desktop stop --state-dir "$HOME/.local/state/agent-presence"
 ```
 
 This opt-in mode follows the most recently prompted Codex chat, not the visually selected tab. It reads only the session's working-directory metadata and lifecycle event tags for presence decisions. Prompt/reply bodies are never forwarded or used as task labels. Background updates and subagent logs cannot take over the selected chat. It switches the file watcher to that chat's project directory and resets the file label on switching.
